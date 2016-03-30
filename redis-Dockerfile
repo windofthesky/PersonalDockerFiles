@@ -1,0 +1,16 @@
+FROM centos:centos6
+MAINTAINER yangyg
+
+# install redis
+RUN yum install -y curl tar make gcc wget
+
+RUN cd /usr/local/src && \
+    wget  http://download.redis.io/releases/redis-2.8.19.tar.gz  && \
+    tar xf redis-2.8.19.tar.gz && \
+    cd redis-2.8.19 && \
+    make && \
+    make install
+
+EXPOSE 6379
+CMD ["/usr/local/bin/redis-server"]
+
